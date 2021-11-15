@@ -1,16 +1,92 @@
 <DOCTYPE! HTML>
-<html>
-<body>
-<style>
-textarea{background-color:yellow color:black}
-</style>
-<form method="post">
-<label for="note">You can write it here : </label>
-<textarea name="notes" cols="70" rows="7" placeholder="Input here" id="note">
-</textarea>
-  <br><br>
-  <input type="submit" value="Submit">
-</form>
-</p>
-</body>
-</html>
+  <html>
+
+  <body>
+    <style>
+      textarea {
+        background-color: yellow color:black
+      }
+    </style>
+    <form>
+      <label for="note">You can write it here : </label>
+      <input name="notes" id="task" cols="70" rows="7" placeholder="Input here" id="note">
+      </input>
+      <br><br>
+      <button type="button" id="sub" onclick="func();">Submit</button>
+    </form>
+    </p>
+    <br><br>
+    <ul class="todoitems"></ul>
+  </body>
+  <script>
+    var data = [];
+    try {
+      var x = (JSON.parse(localStorage.getItem('todos')));
+      if (!x) {
+      }
+      else {
+        for (let i = 0; i < x.length; i++) {
+          const element = x[i];
+          data.push(element);
+        }
+      }
+    }
+    catch (e) {
+      console.log('op');
+    }
+    const todoItemsList = document.querySelector('.todoitems');
+    function func() {
+      const task = document.getElementById("task").value;
+      var todo = {
+        id: Date.now(),
+        name: task,
+        completed: false
+      };
+      data.push(todo);
+      addToLocalStorage(data)
+      document.getElementById("task").value = ''
+    }
+    function renderTodos(todos) {
+      todoItemsList.innerHTML = '';
+      todos.forEach(function (item) {
+        const checked = item.completed ? 'checked' : null;
+        const li = document.createElement('li');
+        li.setAttribute('class', 'item');
+        li.setAttribute('data-key', item.id);
+        if (item.completed === true) {
+          li.classList.add('checked');
+        }
+
+        li.innerHTML = `
+      <input type="checkbox" class="checkbox" ${checked}>
+      ${item.name}
+      <button class="delete-button" onclick="func2(${item.id})">X</button>
+    `;
+        todoItemsList.append(li);
+      });
+
+    }
+    function addToLocalStorage(todos) {
+      localStorage.setItem('todos', JSON.stringify(todos));
+      renderTodos(todos);
+    }
+    function getFromLocalStorage() {
+      const reference = localStorage.getItem('todos');
+      if (reference) {
+        todos = JSON.parse(reference);
+        renderTodos(todos);
+      }
+    }
+    function func2(id) {
+      var temp = JSON.parse(localStorage.getItem('todos'));
+      for (let i = 0; i < temp.length; i++) {
+        if (id === temp[i].id) {
+          temp.splice(i, 1);
+          addToLocalStorage(temp)
+        }
+      }
+    }
+    getFromLocalStorage();
+  </script>
+
+  </html>
