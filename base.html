@@ -21,7 +21,7 @@
   <script>
     var data = [];
     try {
-      var x = (JSON.parse(localStorage.getItem('todos')));
+      var x = JSON.parse(localStorage.getItem('todos'));
       if (!x) {
       }
       else {
@@ -83,6 +83,7 @@
         if (id === temp[i].id) {
           temp.splice(i, 1);
           addToLocalStorage(temp)
+          data.splice(i, 1);
         }
       }
     }
