@@ -50,7 +50,7 @@
       <form class="col-8 mx-auto pt-5">
         <p for="note" class="display-1 text-center pt-5"> You can write it here </p>
         <p class="lead text-center">You can keep track of everything you do</p>
-        <input name="notes" id="task" placeholder="Input here" id="note" type="text" class="form-control"
+        <input name="notes" id="task" placeholder="Input here" id="note" type="text" class="form-control col-xs-4"
           aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
         </input>
         <br><br>
@@ -106,11 +106,11 @@
         li.innerHTML = `
         <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="max-width:500px">
 
-      <input class=" form-check-input strikethrough text-center" type="checkbox" value="" aria-label="Checkbox for following text input" ${checked}>
+      <input class=" form-check-input strikethrough text-center" type="checkbox" value="" aria-label="Checkbox for following text input" onclick="sup(${item.id});" ${checked}>
       <span class="text-center  font-monospace fs-4 text-white  rounded-pill-left border-right-0 " style="width: 6rem ;">${item.name}</span>
-      <button type="button" class="btn btn-danger" onclick="func2(${item.id})">Delete</button>
-      <button type="button" class="btn btn-primary">Edit</button>
-  <button type="button" class="btn btn-success">Done</button>
+      <button type="button" id="${item.id + 'del'}" class="btn btn-danger" onclick="func2(${item.id})">Delete</button>
+      <button type="button" id="${item.id + 'ed'}" class="btn btn-primary">Edit</button>
+  <button type="button" id="${item.id + 'do'}" class="btn btn-success">Done</button>
 </div>
 
     `;
@@ -138,6 +138,11 @@
           data.splice(i, 1);
         }
       }
+    }
+    function sup(id) {
+      document.getElementById(id + "del").classList = 'btn btn-danger disabled';
+      document.getElementById(id + "ed").classList = 'btn btn-primary disabled';
+      document.getElementById(id + "do").classList = 'btn btn-success disabled';
     }
     getFromLocalStorage();
   </script>
