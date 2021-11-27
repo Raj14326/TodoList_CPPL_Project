@@ -99,10 +99,7 @@
           li.setAttribute('class', 'item');
           li.setAttribute('data-key', item.id);
           if (item.completed === true) {
-            li.classList.add('checked');
-          }
-
-          li.innerHTML = `
+            li.innerHTML = `
         <div class="row">
         <div class="col-2 ">
 
@@ -110,15 +107,37 @@
         <input class="form-check-input strikethrough text-center" type="checkbox" aria-label="Checkbox for following text input" onclick="sup(${item.id});" ${checked}>
       </input></div>
      <div class="col-8  ">
-      <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  ">${item.name}</p></div>
+      <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  "><del>${item.name}</del></p></div>
       <div class="col-2">
-      <button type="button" id="${item.id + 'del'}" class="btn btn-danger " onclick="func2(${item.id})">Delete</button>
-      <button type="button" id="${item.id + 'ed'}" class="btn btn-primary " onclick="edit(${item.id})">Edit</button>
+      <button type="button" id="${item.id + 'del'}" class="btn btn-danger disabled" onclick="func2(${item.id})">Delete</button>
+      <button type="button" id="${item.id + 'ed'}" class="btn btn-primary disabled" onclick="edit(${item.id})">Edit</button>
     </div>
 </div>
 
     `;
-          todoItemsList.append(li);
+            todoItemsList.append(li);
+
+          }
+          else {
+
+            li.innerHTML = `
+            <div class="row">
+              <div class="col-2 ">
+                
+                
+                <input class="form-check-input strikethrough text-center" type="checkbox" aria-label="Checkbox for following text input" onclick="sup(${item.id});" ${checked}>
+                </input></div>
+                <div class="col-8  ">
+                  <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  ">${item.name}</p></div>
+                  <div class="col-2">
+                    <button type="button" id="${item.id + 'del'}" class="btn btn-danger " onclick="func2(${item.id})">Delete</button>
+                    <button type="button" id="${item.id + 'ed'}" class="btn btn-primary " onclick="edit(${item.id})">Edit</button>
+                    </div>
+                    </div>
+                    
+                    `;
+            todoItemsList.append(li);
+          }
         });
 
       }
@@ -149,6 +168,20 @@
         const get_text = document.getElementById(id + "P").innerHTML
         document.getElementById(id + "P").innerHTML = ""
         $('#' + id + "P").append(`<del>${get_text}</del>`);
+        var temp = JSON.parse(localStorage.getItem('todos'));
+        for (let i = 0; i < temp.length; i++) {
+          if (id === temp[i].id) {
+            var obj = data[i]
+            if (obj.completed) {
+              obj.completed = false;
+            }
+            else {
+              obj.completed = true;
+            }
+            data[i] = obj;
+            addToLocalStorage(data);
+          }
+        }
       }
 
       getFromLocalStorage();
