@@ -39,6 +39,8 @@
       .strikethrough:checked+span {
         text-decoration: line-through
       }
+     
+
     </style>
 
 
@@ -58,9 +60,7 @@
         </div>
       </form>
       <br><br>
-      <div class="row">
-        <ul class="todoitems text-center"></ul>
-      </div>
+        <ul class="row todoitems  "></ul>
     </div>
 
 
@@ -105,14 +105,18 @@
           }
 
           li.innerHTML = `
-        <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="max-width:500px">
+        <div class="row">
+        <div class="col-2 ">
 
-      <input class=" form-check-input strikethrough text-center" type="checkbox" value="" aria-label="Checkbox for following text input" onclick="sup(${item.id});" ${checked}>
-      </input>
-      <p class="text-center  font-monospace fs-4 text-white  rounded-pill-left border-right-0 "  id="${item.id + 'P'}" style="width: 6rem ;">${item.name}</p>
-      <button type="button" id="${item.id + 'del'}" class="btn btn-danger" onclick="func2(${item.id})">Delete</button>
-      <button type="button" id="${item.id + 'ed'}" class="btn btn-primary" onclick="edit(${item.id})">Edit</button>
-  <button type="button" id="${item.id + 'do'}" class="btn btn-success">Done</button>
+         
+        <input class="form-check-input strikethrough text-center" type="checkbox" aria-label="Checkbox for following text input" onclick="sup(${item.id});" ${checked}>
+      </input></div>
+     <div class="col-8  ">
+      <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  ">${item.name}</p></div>
+      <div class="col-2">
+      <button type="button" id="${item.id + 'del'}" class="btn btn-danger " onclick="func2(${item.id})">Delete</button>
+      <button type="button" id="${item.id + 'ed'}" class="btn btn-primary " onclick="edit(${item.id})">Edit</button>
+    </div>
 </div>
 
     `;
