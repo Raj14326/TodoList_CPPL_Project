@@ -39,8 +39,6 @@
       .strikethrough:checked+span {
         text-decoration: line-through
       }
-     
-
     </style>
 
 
@@ -60,7 +58,7 @@
         </div>
       </form>
       <br><br>
-        <ul class="row todoitems  "></ul>
+      <ul class="row todoitems  "></ul>
     </div>
 
 
@@ -148,7 +146,9 @@
       function sup(id) {
         document.getElementById(id + "del").classList = 'btn btn-danger disabled';
         document.getElementById(id + "ed").classList = 'btn btn-primary disabled';
-        document.getElementById(id + "do").classList = 'btn btn-success disabled';
+        const get_text = document.getElementById(id + "P").innerHTML
+        document.getElementById(id + "P").innerHTML = ""
+        $('#' + id + "P").append(`<del>${get_text}</del>`);
       }
 
       getFromLocalStorage();
