@@ -109,7 +109,7 @@
      <div class="col-8  ">
       <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  "><del>${item.name}</del></p></div>
       <div class="col-2">
-      <button type="button" id="${item.id + 'del'}" class="btn btn-danger disabled" onclick="func2(${item.id})">Delete</button>
+      <button type="button" id="${item.id + 'del'}" class="btn btn-danger disabled" onclick="delete(${item.id})">Delete</button>
       <button type="button" id="${item.id + 'ed'}" class="btn btn-primary disabled" onclick="edit(${item.id})">Edit</button>
     </div>
 </div>
@@ -125,12 +125,12 @@
               <div class="col-2 ">
                 
                 
-                <input class="form-check-input strikethrough text-center" type="checkbox" aria-label="Checkbox for following text input" onclick="sup(${item.id});" ${checked}>
+                <input class="form-check-input strikethrough text-center" type="checkbox" aria-label="Checkbox for following text input" onclick="check_me(${item.id});" ${checked}>
                 </input></div>
                 <div class="col-8  ">
                   <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  ">${item.name}</p></div>
                   <div class="col-2">
-                    <button type="button" id="${item.id + 'del'}" class="btn btn-danger " onclick="func2(${item.id})">Delete</button>
+                    <button type="button" id="${item.id + 'del'}" class="btn btn-danger " onclick="delete_me(${item.id})">Delete</button>
                     <button type="button" id="${item.id + 'ed'}" class="btn btn-primary " onclick="edit(${item.id})">Edit</button>
                     </div>
                     </div>
@@ -152,7 +152,7 @@
           renderTodos(todos);
         }
       }
-      function func2(id) {
+      function delete_me(id) {
         var temp = JSON.parse(localStorage.getItem('todos'));
         for (let i = 0; i < temp.length; i++) {
           if (id === temp[i].id) {
@@ -162,7 +162,7 @@
           }
         }
       }
-      function sup(id) {
+      function check_me(id) {
         document.getElementById(id + "del").classList = 'btn btn-danger disabled';
         document.getElementById(id + "ed").classList = 'btn btn-primary disabled';
         const get_text = document.getElementById(id + "P").innerHTML
