@@ -1,8 +1,22 @@
 body {
-  /*background-color: #6610f2;*/
-  background: linear-gradient(-120deg, #021b79, #0575e6, #205e9b);
-
+  line-height: 1.6;
+  word-spacing: 1.4px;
+  background-color: #101820;
+  /* background: linear-gradient(-120deg, #021b79, #0575e6, #205e9b); */
+  font-family: "Poppins", sans-serif;
+  color: #eef2f6;
   font-size: 1rem;
+}
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  display: inline-block;
+  background: none;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  text-transform: capitalize;
 }
 
 label {
@@ -15,16 +29,111 @@ label {
 
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
   margin-top: 2rem;
   border-top: 2px solid white;
 }
-
+h1 {
+  font-size: 4.5rem;
+  font-family: "Poppins", sans-serif;
+}
 li {
   border-bottom: 1px solid white;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+p {
+  word-spacing: 1.4px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+.btn-bg {
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 1em 2.25em;
+  color: #101820;
+  background-color: #61dafb;
+  border: 1px solid #61dafb;
+  transition: all 0.3s;
+}
 
+.btn-bg:hover,
+.btn-bg:focus {
+  background-color: #eef2f6;
+  border: 1px solid #eef2f6;
+}
+.btn {
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #eef2f6;
+  background-color: transparent;
+}
+.btn-border {
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 1em 2.25em;
+  color: #61dafb;
+  background-color: transparent;
+  border: 1px solid #61dafb;
+  transition: all 0.3s;
+}
+.btn-border:hover,
+.btn-border:focus {
+  background-color: rgba(97, 218, 251, 0.1);
+}
+.todo-btn {
+  min-width: 10em;
+}
+.text {
+  border: none;
+  outline: 0;
+  padding: 1em 1em 1em 0.5em;
+  background-color: transparent;
+  color: #eef2f6;
+  font-size: 1.125rem;
+  border: 1px solid #61dafb;
+  width: 100%;
+  margin-bottom: 1.5em;
+  transition: all 0.3s;
+}
+.edit {
+  font-size: 1rem;
+  padding: 0.75rem 0.5rem 0.5rem 0.5rem;
+}
+.text:hover {
+  background-color: rgba(97, 218, 251, 0.1);
+}
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50em;
+}
+.ibtn {
+  font-size: 1.75rem;
+  color: #61dafb;
+  margin: 0 0.5em;
+  transition: all 0.3s;
+}
+.blue {
+  color: #61dafb;
+}
+.navbar {
+  background-color: #101820;
+}
+.lg-container {
+  width: 90%;
+  margin: 0 auto;
+}
+.leads {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
 .strikethrough:checked + span {
   text-decoration: line-through;
 }

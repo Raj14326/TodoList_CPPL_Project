@@ -38,13 +38,20 @@ function renderTodos(todos) {
         <div class="col-2 ">
 
          
-        <input class="form-check-input strikethrough text-center" type="checkbox" aria-label="Checkbox for following text input" onclick="check_me(${item.id});" ${checked}>
-      </input></div>
-     <div class="col-8  ">
+        <button class="ibtn" type="button" onclick="check_me(${item.id});" ${checked}>
+        <span>
+        <i class="fa fa-check-square-o"></i>
+        </span>
+        </button></div>
+     <div class="col-7">
       <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  "><del>${item.name}</del></p></div>
-      <div class="col-2">
-      <button type="button" id="${item.id + 'del'}" class="btn btn-danger disabled" onclick="delete_me(${item.id})">Delete</button>
-      <button type="button" id="${item.id + 'ed'}" class="btn btn-primary disabled" onclick="edit(${item.id})">Edit</button>
+      <div class="col-3">
+      <button type="button" id="${item.id + 'del'}" class="ibtn" onclick="delete_me(${item.id})"> <span>
+      <i class="fa fa-trash"></i>
+      </span></button>
+      <button type="button" id="${item.id + 'ed'}" class="ibtn" onclick="edit(${item.id})"><span>
+      <i class="fa fa-edit"></i>
+      </span></button>
     </div>
 </div>
 
@@ -59,13 +66,24 @@ function renderTodos(todos) {
               <div class="col-2 ">
                 
                 
-                <input class="form-check-input strikethrough text-center" type="checkbox" aria-label="Checkbox for following text input" onclick="check_me(${item.id});" ${checked}>
-                </input></div>
-                <div class="col-8  ">
-                  <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}"  ">${item.name}</p></div>
-                  <div class="col-2">
-                    <button type="button" id="${item.id + 'del'}" class="btn btn-danger " onclick="delete_me(${item.id})">Delete</button>
-                    <button type="button" id="${item.id + 'ed'}" class="btn btn-primary " onclick="edit(${item.id})">Edit</button>
+                <button class="ibtn" type="button" onclick="check_me(${item.id});" ${checked}>
+                <span>
+                <i class="fa fa-square-o"></i>
+                </span>
+                </button></div>
+                <div class="col-7">
+                  <p class="text-center  font-monospace fs-4 text-white "  id="${item.id + 'P'}">${item.name}</p></div>
+                  <div class="col-3">
+                    <button type="button" id="${item.id + 'del'}" class="ibtn" onclick="delete_me(${item.id})">
+                    <span>
+                    <i class="fa fa-trash"></i>
+                    </span>
+                    </button>
+                    <button type="button" id="${item.id + 'ed'}" class="ibtn edit" onclick="edit(${item.id})">
+                    <span>
+                    <i class="fa fa-edit"></i>
+                    </span>
+                    </button>
                     </div>
                     </div>
                     
@@ -97,8 +115,6 @@ function delete_me(id) {
     }
 }
 function check_me(id) {
-    document.getElementById(id + "del").classList = 'btn btn-danger disabled';
-    document.getElementById(id + "ed").classList = 'btn btn-primary disabled';
     const get_text = document.getElementById(id + "P").innerHTML
     document.getElementById(id + "P").innerHTML = ""
     $('#' + id + "P").append(`<del>${get_text}</del>`);
@@ -120,26 +136,27 @@ function check_me(id) {
 
 getFromLocalStorage();
 function edit(id) {
-    var my_text = document.getElementById(id + "ed").innerHTML
-    if (my_text === 'Edit') {
+    var my_text = document.getElementById(id + "ed").className
+    if (my_text === 'ibtn edit') {
 
         console.log("ok");
         var t = document.getElementById(id + "P").innerHTML
         var text = $('#' + id + "P").text();
-        var input = $(`<input type="text" class="form-control col-xs-4" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" id="${id + 'in'}" value="${text}" />`)
+        console.log("--->>> ", text);
+        var input = $(`<input type="text" class="edit text " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" id="${id + 'in'}" value="${text}" />`)
         $('#' + id + "P").replaceWith(input);
-        document.getElementById(id + "ed").innerHTML = "Save"
+        document.getElementById(id + "ed").className = "ibtn Save"
         console.log(text);
     }
-    if (my_text === 'Save') {
-        console.log("ok");
+    if (my_text === 'ibtn Save') {
+        console.log("oks");
         var text = $('#' + id + "in").val();
         console.log(text);
         var temp = JSON.parse(localStorage.getItem('todos'));
         for (let i = 0; i < temp.length; i++) {
             if (id === temp[i].id) {
                 var todo = {
-                    id: Date.now(),
+                    id: id,
                     name: text,
                     completed: false
                 };
@@ -147,9 +164,8 @@ function edit(id) {
                 addToLocalStorage(data)
             }
         }
-
-        var input = $(`<p class="text-center  font-monospace fs-4 text-white  rounded-pill-left border-right-0 " id="${id + 'P'}" style="width: 6rem ;">${text}</p>`)
+        var input = $(`<p class="text-center  font-monospace fs-4 text-white" id="${id + 'P'}">${text}</p>`)
         $('#' + id + "in").replaceWith(input);
-        document.getElementById(id + "ed").innerHTML = "Save"
+        document.getElementById(id + "ed").className = "ibtn edit"
     }
 }
