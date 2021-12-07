@@ -1,3 +1,6 @@
+$(function () {
+    $("#datepicker").datepicker();
+});
 var data = [];
 try {
     var x = JSON.parse(localStorage.getItem('todos'));
@@ -81,7 +84,7 @@ function renderTodos(todos) {
                     </button>
                     <button type="button" id="${item.id + 'ed'}" class="ibtn edit" onclick="edit(${item.id})">
                     <span>
-                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-edit" id="${item.id + 'indicate'}"></i>
                     </span>
                     </button>
                     </div>
@@ -144,6 +147,7 @@ function edit(id) {
         var text = $('#' + id + "P").text();
         console.log("--->>> ", text);
         var input = $(`<input type="text" class="edit text " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" id="${id + 'in'}" value="${text}" />`)
+        document.getElementById(id + "indicate").className = "fa fa-save"
         $('#' + id + "P").replaceWith(input);
         document.getElementById(id + "ed").className = "ibtn Save"
         console.log(text);
